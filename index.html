@@ -278,7 +278,6 @@
         border-radius: 2px;
       }
 
-      /* MODAL D'INSCRIPTION */
       .modal-overlay {
         position: fixed;
         top: 0;
@@ -1323,7 +1322,6 @@
       </div>
     </header>
 
-    <!-- MODAL D'INSCRIPTION -->
     <div class="modal-overlay" id="inscription-modal">
       <div class="modal-content">
         <button class="modal-close" id="close-modal">
@@ -1470,7 +1468,6 @@
     </footer>
 
     <script>
-      // Variables pour le modal
       const modal = document.getElementById("inscription-modal");
       const openModalBtn = document.getElementById("open-modal");
       const closeModalBtn = document.getElementById("close-modal");
@@ -1478,20 +1475,17 @@
       const successMessage = document.getElementById("success-message");
       const submitBtn = document.getElementById("submit-btn");
 
-      // Ouvrir le modal
       openModalBtn.addEventListener("click", function (e) {
         e.preventDefault();
         modal.classList.add("active");
-        document.body.style.overflow = "hidden"; // Empêcher le scroll
+        document.body.style.overflow = "hidden";
       });
 
-      // Fermer le modal
       closeModalBtn.addEventListener("click", function () {
         modal.classList.remove("active");
         document.body.style.overflow = "auto";
       });
 
-      // Fermer le modal en cliquant en dehors
       modal.addEventListener("click", function (e) {
         if (e.target === modal) {
           modal.classList.remove("active");
@@ -1499,11 +1493,9 @@
         }
       });
 
-      // Gestion du formulaire
       inscriptionForm.addEventListener("submit", async function (e) {
         e.preventDefault();
 
-        // Récupérer les données du formulaire
         const discordName = document.getElementById("discord-name").value;
         const duelLinksName = document.getElementById("duel-links-name").value;
         const acceptRules = document.getElementById("accept-rules").checked;
@@ -1513,11 +1505,9 @@
           return;
         }
 
-        // Désactiver le bouton pendant l'envoi
         submitBtn.disabled = true;
         submitBtn.textContent = "ENVOI EN COURS...";
 
-        // Obtenir la date et heure actuelles
         const now = new Date();
         const timeString = `${now.getHours().toString().padStart(2, "0")}:${now
           .getMinutes()
@@ -1533,10 +1523,9 @@
           const WEBHOOK_URL =
             "https://discord.com/api/webhooks/1458934904094986250/HgFFRwsUwe27QQtCuuiH284DXimmPw-bgPt4kiPX_FwSihM-7rYwIjM9b-wCM2mlZd_8";
 
-          // Créer l'embed Discord
           const embed = {
             title: "🎮 NOUVELLE INSCRIPTION - Ligue Du Pharaon",
-            color: 16711680, // Rouge
+            color: 16711680,
             fields: [
               {
                 name: "👤 Nom Discord",
@@ -1563,7 +1552,6 @@
             },
           };
 
-          // Envoyer les données au webhook Discord
           const response = await fetch(WEBHOOK_URL, {
             method: "POST",
             headers: {
@@ -1576,11 +1564,9 @@
           });
 
           if (response.ok) {
-            // Afficher le message de succès
             successMessage.classList.add("active");
             inscriptionForm.style.display = "none";
 
-            // Réinitialiser le formulaire
             setTimeout(() => {
               inscriptionForm.reset();
               inscriptionForm.style.display = "block";
@@ -1588,7 +1574,6 @@
               modal.classList.remove("active");
               document.body.style.overflow = "auto";
 
-              // Réactiver le bouton
               submitBtn.disabled = false;
               submitBtn.textContent = "VALIDER L'INSCRIPTION";
             }, 5000);
@@ -1601,13 +1586,11 @@
             "Une erreur est survenue lors de l'inscription. Veuillez réessayer."
           );
 
-          // Réactiver le bouton en cas d'erreur
           submitBtn.disabled = false;
           submitBtn.textContent = "VALIDER L'INSCRIPTION";
         }
       });
 
-      // Navigation burger
       const burger = document.getElementById("burger");
       const navMenu = document.getElementById("nav-menu");
 
@@ -1625,7 +1608,6 @@
           });
         });
 
-      // Effet de scroll sur le header
       window.addEventListener("scroll", () => {
         const header = document.querySelector("header");
         if (window.scrollY > 50) {
@@ -1639,7 +1621,6 @@
         }
       });
 
-      // Animation des lettres du titre
       function createLetterAnimation(elementId, startIndex = 0) {
         const element = document.getElementById(elementId);
         if (!element) return;
@@ -1659,11 +1640,9 @@
         }
       }
 
-      // Initialisation au chargement
       document.addEventListener("DOMContentLoaded", () => {
         createLetterAnimation("animated-title", 0);
 
-        // Animation du rectangle déformé
         const deformedRect = document.querySelector(".deformed-rectangle");
         if (deformedRect) {
           deformedRect.style.opacity = "0";
@@ -1679,7 +1658,6 @@
           }, 400);
         }
 
-        // Animation du texte
         const heroText = document.querySelector(".text-column");
         if (heroText) {
           heroText.style.opacity = "0";
@@ -1692,7 +1670,6 @@
           }, 200);
         }
 
-        // Effets des boutons sociaux
         const socialButtons = document.querySelectorAll(".social-button");
         socialButtons.forEach((button) => {
           button.addEventListener("mouseenter", function () {
@@ -1710,7 +1687,6 @@
         });
       });
 
-      // Effet de survol sur le rectangle déformé
       const deformedRect = document.querySelector(".deformed-rectangle");
       if (deformedRect) {
         deformedRect.addEventListener("mouseenter", function () {
