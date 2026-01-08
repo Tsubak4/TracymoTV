@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ligue Du Pharaon - Tracymo TV</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        color: #fff;
+        background-color: #0a0a0a;
+        overflow-x: hidden;
+        background-image: radial-gradient(
+            circle at 20% 30%,
+            rgba(0, 100, 255, 0.1) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(255, 0, 0, 0.1) 0%,
+            transparent 20%
+          );
+      }
+
+      :root {
+        --yu-gi-red: #ff0000;
+        --yu-gi-red-dark: #cc0000;
+        --yu-gi-red-light: #ff3333;
+        --yu-gi-blue: #0066ff;
+        --yu-gi-blue-dark: #0044cc;
+        --yu-gi-blue-light: #3399ff;
+        --yu-gi-neon-blue: #00ccff;
+        --yu-gi-black: #000000;
+        --yu-gi-dark: #111111;
+        --yu-gi-gray: #8c8c8c;
+        --yu-gi-yellow: #ffcc00;
+        --yu-gi-purple: #800080;
+        --discord-purple: #5865f2;
+        --twitch-purple: #9146ff;
+        --tiktok-pink: #ff0050;
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--yu-gi-black) 0%,
+          var(--yu-gi-dark) 100%
+        );
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+        border-bottom: 3px solid var(--yu-gi-red);
+        box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 30px;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        background: rgba(255, 0, 0, 0.1);
+        border: 2px solid var(--yu-gi-red);
+        border-radius: 8px;
+      }
+
+      .logo-container img {
+        height: 60px;
+        width: auto;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+      }
+
+      .logo-text-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 15px;
+      }
+
+      .logo-text {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--yu-gi-red);
+        text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+      }
+
+      .logo-subtitle {
+        font-family: "Roboto", sans-serif;
+        font-size: 0.8rem;
+        color: var(--yu-gi-blue-light);
+        font-weight: 300;
+        letter-spacing: 1px;
+        text-align: center;
+        width: 100%;
+        margin-top: 2px;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 5px;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        font-family: "Orbitron", sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 12px 20px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 90px;
+      }
+
+      nav a {
+        border: 2px solid var(--yu-gi-neon-blue);
+        animation: borderPulse 2s infinite;
+        box-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+      }
+
+      @keyframes borderPulse {
+        0%,
+        100% {
+          border-color: var(--yu-gi-neon-blue);
+          box-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+        }
+        50% {
+          border-color: #00ffff;
+          box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        }
+      }
+
+      .nav-icon {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+        color: var(--yu-gi-neon-blue);
+        display: block;
+      }
+
+      .nav-text {
+        font-size: 0.9rem;
+        display: block;
+      }
+
+      nav a.active,
+      nav a:hover {
+        background: rgba(0, 204, 255, 0.1);
+        animation: none;
+        border-color: #00ffff;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+      }
+
+      nav a::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(
+          45deg,
+          var(--yu-gi-neon-blue),
+          transparent,
+          var(--yu-gi-neon-blue)
+        );
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 27px;
+      }
+
+      nav a:hover::before {
+        opacity: 0.4;
+      }
+
+      .cta-button {
+        background: linear-gradient(
+          135deg,
+          var(--yu-gi-red),
+          var(--yu-gi-blue)
+        );
+        color: white;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-family: "Orbitron", sans-serif;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: 2px solid var(--yu-gi-red);
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 100px;
+        margin-left: 10px;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 102, 255, 0.5);
+        background: linear-gradient(
+          135deg,
+          var(--yu-gi-blue),
+          var(--yu-gi-red)
+        );
+      }
+
+      .burger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        background: rgba(255, 0, 0, 0.1);
+        padding: 10px;
+        border-radius: 6px;
+        border: 2px solid var(--yu-gi-red);
+        margin-left: 15px;
+      }
+
+      .burger span {
+        width: 25px;
+        height: 3px;
+        background: var(--yu-gi-red);
+        margin: 3px 0;
+        transition: 0.3s;
+        border-radius: 2px;
+      }
+
+      /* MODAL D'INSCRIPTION */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-content {
+        background: linear-gradient(
+          145deg,
+          var(--yu-gi-black),
+          var(--yu-gi-dark)
+        );
+        border: 3px solid var(--yu-gi-red);
+        border-radius: 15px;
+        padding: 40px;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        box-shadow: 0 20px 50px rgba(255, 0, 0, 0.4);
+        transform: translateY(-50px) scale(0.9);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .modal-overlay.active .modal-content {
+        transform: translateY(0) scale(1);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: var(--yu-gi-red);
+        color: white;
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      }
+
+      .modal-close:hover {
+        background: var(--yu-gi-red-light);
+        transform: rotate(90deg);
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+      }
+
+      .modal-title {
+        font-family: "Orbitron", sans-serif;
+        color: var(--yu-gi-red);
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      .modal-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: var(--yu-gi-blue);
+        border-radius: 2px;
+        animation: linePulse 2s infinite;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--yu-gi-blue-light);
+        font-family: "Orbitron", sans-serif;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .form-group input[type="text"] {
+        width: 100%;
+        padding: 14px 15px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid var(--yu-gi-blue);
+        border-radius: 10px;
+        color: white;
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      .form-group input[type="text"]:focus {
+        outline: none;
+        border-color: var(--yu-gi-neon-blue);
+        box-shadow: 0 0 15px rgba(0, 204, 255, 0.5),
+          inset 0 2px 5px rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 30px;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 0, 0, 0.2);
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        margin-right: 12px;
+        width: 22px;
+        height: 22px;
+        accent-color: var(--yu-gi-red);
+        cursor: pointer;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .checkbox-group label {
+        color: white;
+        font-size: 0.9rem;
+        font-family: "Roboto", sans-serif;
+        line-height: 1.4;
+      }
+
+      .checkbox-group a {
+        color: var(--yu-gi-blue-light);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .checkbox-group a:hover {
+        text-decoration: underline;
+        color: var(--yu-gi-neon-blue);
+      }
+
+      .submit-button {
+        background: linear-gradient(
+          135deg,
+          var(--yu-gi-red),
+          var(--yu-gi-blue)
+        );
+        color: white;
+        padding: 16px 30px;
+        border: none;
+        border-radius: 25px;
+        font-family: "Orbitron", sans-serif;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 25px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.7s ease;
+      }
+
+      .submit-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 102, 255, 0.6);
+        background: linear-gradient(
+          135deg,
+          var(--yu-gi-blue),
+          var(--yu-gi-red)
+        );
+      }
+
+      .submit-button:hover::before {
+        left: 100%;
+      }
+
+      .submit-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+      }
+
+      .success-message {
+        background: linear-gradient(
+          145deg,
+          rgba(0, 100, 0, 0.9),
+          rgba(0, 70, 0, 0.95)
+        );
+        border: 2px solid #00ff00;
+        border-radius: 10px;
+        padding: 25px;
+        text-align: center;
+        margin-top: 20px;
+        display: none;
+        animation: fadeIn 0.5s ease;
+        box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+      }
+
+      .success-message.active {
+        display: block;
+      }
+
+      .success-message h3 {
+        color: #00ff00;
+        font-family: "Orbitron", sans-serif;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+        text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+      }
+
+      .success-message p {
+        color: white;
+        font-size: 1.1rem;
+        line-height: 1.5;
+      }
+
+      .success-icon {
+        font-size: 3rem;
+        color: #00ff00;
+        margin-bottom: 15px;
+        animation: bounce 1s ease infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .main-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+        min-height: calc(100vh - 100px);
+        padding-top: 50px;
+      }
+
+      .text-column {
+        padding-right: 40px;
+      }
+
+      .image-column {
+        position: relative;
+        height: 550px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .deformed-rectangle {
+        width: 95%;
+        height: 95%;
+        background: linear-gradient(
+          135deg,
+          var(--yu-gi-black),
+          var(--yu-gi-dark)
+        );
+        border: 3px solid var(--yu-gi-red);
+        position: relative;
+        transform: perspective(1000px) rotateY(-15deg) rotateX(5deg);
+        transform-style: preserve-3d;
+        overflow: hidden;
+        box-shadow: 25px 25px 50px rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .deformed-rectangle img {
+        width: 90%;
+        height: 90%;
+        object-fit: contain;
+        transform: scale(1);
+        transition: transform 0.5s ease;
+        filter: contrast(1.1) brightness(1.05);
+        position: relative;
+        z-index: 1;
+        margin-top: -70px;
+      }
+
+      .deformed-rectangle:hover img {
+        transform: scale(1.05);
+      }
+
+      .deformed-rectangle::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 0, 0, 0.1) 0%,
+          transparent 70%
+        );
+        z-index: 0;
+      }
+
+      .deformed-rectangle::before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          var(--yu-gi-blue),
+          transparent
+        );
+        z-index: -1;
+        filter: blur(15px);
+        opacity: 0.6;
+        border-radius: 12px;
+      }
+
+      .image-overlay {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.9);
+        padding: 20px;
+        color: white;
+        border: 2px solid var(--yu-gi-red);
+        border-radius: 8px;
+        z-index: 2;
+        text-align: center;
+      }
+
+      .image-overlay h3 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.5rem;
+        color: var(--yu-gi-red);
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .image-overlay p {
+        font-size: 0.9rem;
+        color: var(--yu-gi-blue-light);
+        font-weight: 300;
+      }
+
+      .hero {
+        min-height: 100vh;
+        background: var(--yu-gi-black);
+        display: flex;
+        align-items: center;
+        padding-top: 100px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 20% 80%,
+            rgba(255, 0, 0, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(0, 102, 255, 0.2) 0%,
+            transparent 50%
+          );
+        z-index: 0;
+      }
+
+      .hero-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 30px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero .title-container {
+        position: relative;
+        margin-bottom: 30px;
+      }
+
+      .hero h1 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 3.5rem;
+        margin-bottom: 15px;
+        color: var(--yu-gi-red);
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        line-height: 1.1;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .hero .title-container::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: var(--yu-gi-red);
+        border-radius: 2px;
+        animation: linePulse 2s infinite;
+      }
+
+      @keyframes linePulse {
+        0%,
+        100% {
+          width: 100px;
+          opacity: 1;
+        }
+        50% {
+          width: 150px;
+          opacity: 0.7;
+        }
+      }
+
+      .hero h1 .letter {
+        display: inline-block;
+        animation: letterGlow 3s infinite;
+        animation-delay: calc(var(--index) * 0.1s);
+      }
+
+      @keyframes letterGlow {
+        0%,
+        100% {
+          color: var(--yu-gi-red);
+          text-shadow: 0 0 5px var(--yu-gi-red), 0 0 10px var(--yu-gi-red),
+            0 0 20px var(--yu-gi-red);
+        }
+        50% {
+          color: var(--yu-gi-blue-light);
+          text-shadow: 0 0 10px var(--yu-gi-blue-light),
+            0 0 20px var(--yu-gi-blue-light), 0 0 30px var(--yu-gi-blue),
+            0 0 40px var(--yu-gi-blue);
+        }
+      }
+
+      .hero .subtitle {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.4rem;
+        color: var(--yu-gi-blue-light);
+        margin-bottom: 30px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        background: linear-gradient(
+          to right,
+          var(--yu-gi-red),
+          var(--yu-gi-blue-light)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-align: center;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 300;
+        text-align: center;
+      }
+
+      .links-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 2rem;
+        color: var(--yu-gi-blue-light);
+        text-align: center;
+        margin: 50px 0 30px 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+      }
+
+      .button-container {
+        margin-top: 40px;
+        margin-bottom: 60px;
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+      }
+
+      .social-button {
+        background: linear-gradient(
+          145deg,
+          rgba(0, 0, 0, 0.9),
+          rgba(34, 34, 34, 0.7)
+        );
+        color: white;
+        padding: 20px 15px;
+        border-radius: 25px;
+        font-family: "Orbitron", sans-serif;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 3px solid;
+        box-shadow: 0 6px 20px, inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        min-width: 180px;
+        max-width: 280px;
+        height: 140px;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        text-align: center;
+        animation: neonPulse 2s infinite;
+      }
+
+      @keyframes neonPulse {
+        0%,
+        100% {
+          box-shadow: 0 6px 20px, inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 30px, inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      .social-button.discord {
+        border-color: var(--discord-purple);
+        box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        animation: discordPulse 2s infinite;
+      }
+
+      @keyframes discordPulse {
+        0%,
+        100% {
+          box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(88, 101, 242, 0.9),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      .social-button.twitch {
+        border-color: var(--twitch-purple);
+        box-shadow: 0 6px 20px rgba(145, 70, 255, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        animation: twitchPulse 2s infinite;
+      }
+
+      @keyframes twitchPulse {
+        0%,
+        100% {
+          box-shadow: 0 6px 20px rgba(145, 70, 255, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(145, 70, 255, 0.9),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      .social-button.tiktok {
+        border-color: var(--tiktok-pink);
+        box-shadow: 0 6px 20px rgba(255, 0, 80, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        animation: tiktokPulse 2s infinite;
+      }
+
+      @keyframes tiktokPulse {
+        0%,
+        100% {
+          box-shadow: 0 6px 20px rgba(255, 0, 80, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(255, 0, 80, 0.9),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+      }
+
+      .social-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.7s ease;
+        z-index: -1;
+      }
+
+      .social-button:hover {
+        transform: translateY(-5px) scale(1.05);
+        background: linear-gradient(
+          145deg,
+          rgba(34, 34, 34, 0.9),
+          rgba(0, 0, 0, 0.9)
+        );
+        animation: none;
+      }
+
+      .social-button.discord:hover {
+        box-shadow: 0 12px 30px rgba(88, 101, 242, 0.8),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+
+      .social-button.twitch:hover {
+        box-shadow: 0 12px 30px rgba(145, 70, 255, 0.8),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+
+      .social-button.tiktok:hover {
+        box-shadow: 0 12px 30px rgba(255, 0, 80, 0.8),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+
+      .social-button:hover::before {
+        left: 100%;
+      }
+
+      .social-button .nav-icon {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+        color: white;
+      }
+
+      .social-button.discord .nav-icon {
+        color: var(--discord-purple);
+      }
+
+      .social-button.twitch .nav-icon {
+        color: var(--twitch-purple);
+      }
+
+      .social-button.tiktok .nav-icon {
+        color: var(--tiktok-pink);
+      }
+
+      .social-button .nav-text {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      footer {
+        background: linear-gradient(
+          135deg,
+          var(--yu-gi-black) 0%,
+          var(--yu-gi-dark) 100%
+        );
+        padding: 30px 0;
+        border-top: 3px solid var(--yu-gi-blue);
+        text-align: center;
+        position: relative;
+      }
+
+      footer::before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--yu-gi-blue);
+      }
+
+      .footer-bottom {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1rem;
+        color: var(--yu-gi-red);
+        font-weight: 500;
+        letter-spacing: 1px;
+      }
+
+      .footer-bottom strong {
+        color: var(--yu-gi-blue-light);
+      }
+
+      @media (max-width: 1200px) {
+        .container {
+          padding: 0 20px;
+        }
+
+        .hero h1 {
+          font-size: 3rem;
+        }
+
+        .main-content {
+          gap: 60px;
+        }
+
+        .image-column {
+          height: 500px;
+        }
+
+        .links-title {
+          font-size: 1.8rem;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .main-content {
+          grid-template-columns: 1fr;
+          gap: 50px;
+          padding-top: 90px;
+        }
+
+        .text-column {
+          padding-right: 0;
+          text-align: center;
+        }
+
+        .image-column {
+          height: 450px;
+          order: -1;
+        }
+
+        .deformed-rectangle {
+          width: 85%;
+          height: 90%;
+          transform: perspective(800px) rotateY(0deg) rotateX(8deg);
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero .subtitle {
+          font-size: 1.2rem;
+        }
+
+        nav ul {
+          gap: 3px;
+        }
+
+        nav a {
+          padding: 10px 15px;
+          min-width: 80px;
+        }
+
+        .nav-icon {
+          font-size: 1.3rem;
+        }
+
+        .nav-text {
+          font-size: 0.8rem;
+        }
+
+        .social-button {
+          min-width: 160px;
+          max-width: 240px;
+          height: 130px;
+          padding: 18px 12px;
+        }
+
+        .links-title {
+          font-size: 1.6rem;
+          margin: 40px 0 25px 0;
+        }
+      }
+
+      @media (max-width: 768px) {
+        nav ul {
+          display: none;
+          position: fixed;
+          top: 100px;
+          left: 0;
+          width: 100%;
+          background: linear-gradient(
+            135deg,
+            var(--yu-gi-black) 0%,
+            var(--yu-gi-dark) 100%
+          );
+          flex-direction: column;
+          padding: 20px;
+          text-align: center;
+          gap: 10px;
+          border-top: 2px solid var(--yu-gi-red);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+          z-index: 999;
+        }
+
+        nav ul.active {
+          display: flex;
+        }
+
+        nav a {
+          padding: 15px;
+          min-width: auto;
+          width: 100%;
+          max-width: 300px;
+          margin: 0 auto;
+        }
+
+        .burger {
+          display: flex;
+        }
+
+        .logo-text {
+          font-size: 1.5rem;
+        }
+
+        .hero h1 {
+          font-size: 2.2rem;
+          white-space: normal;
+        }
+
+        .hero .subtitle {
+          font-size: 1.1rem;
+        }
+
+        .cta-button {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+          min-width: auto;
+          margin-top: 10px;
+        }
+
+        .image-column {
+          height: 400px;
+        }
+
+        .deformed-rectangle {
+          width: 90%;
+        }
+
+        .button-container {
+          justify-content: center;
+          margin-bottom: 50px;
+        }
+
+        .social-button {
+          min-width: 150px;
+          max-width: 220px;
+          height: 120px;
+          padding: 16px 10px;
+        }
+
+        .social-button .nav-icon {
+          font-size: 1.8rem;
+          margin-bottom: 8px;
+        }
+
+        .social-button .nav-text {
+          font-size: 0.9rem;
+        }
+
+        .links-title {
+          font-size: 1.4rem;
+          margin: 30px 0 20px 0;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .main-content {
+          padding-top: 90px;
+        }
+
+        .image-column {
+          height: 350px;
+        }
+
+        .deformed-rectangle {
+          width: 95%;
+          height: 85%;
+        }
+
+        .container {
+          padding: 0 15px;
+        }
+
+        .logo-text {
+          font-size: 1.2rem;
+        }
+
+        .button-container {
+          flex-direction: column;
+          align-items: center;
+          gap: 15px;
+        }
+
+        .social-button {
+          width: 100%;
+          max-width: 280px;
+          height: 110px;
+          padding: 14px 10px;
+        }
+
+        .social-button .nav-icon {
+          font-size: 1.6rem;
+          margin-bottom: 6px;
+        }
+
+        .social-button .nav-text {
+          font-size: 0.85rem;
+        }
+
+        .links-title {
+          font-size: 1.2rem;
+          margin: 25px 0 15px 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <div class="nav-container">
+          <div class="logo-container">
+            <img src="assets/logo.png" alt="Logo Ligue Du Pharaon" />
+            <div class="logo-text-container">
+              <div class="logo-text">YU-GI-OH Duel Links!</div>
+              <div class="logo-subtitle">TRACYMO TV PRESENTE</div>
+            </div>
+          </div>
+
+          <nav>
+            <ul id="nav-menu">
+              <li>
+                <a href="index.html" class="active">
+                  <span class="nav-icon">🏠</span>
+                  <span class="nav-text">Accueil</span>
+                </a>
+              </li>
+              <li>
+                <a href="reglements.html">
+                  <span class="nav-icon">📜</span>
+                  <span class="nav-text">Règlement</span>
+                </a>
+              </li>
+              <li>
+                <a href="classement.html">
+                  <span class="nav-icon">🏆</span>
+                  <span class="nav-text">Classement</span>
+                </a>
+              </li>
+            </ul>
+
+            <a href="#" class="cta-button" id="open-modal"> S'INSCRIRE </a>
+
+            <div class="burger" id="burger">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- MODAL D'INSCRIPTION -->
+    <div class="modal-overlay" id="inscription-modal">
+      <div class="modal-content">
+        <button class="modal-close" id="close-modal">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <h2 class="modal-title">INSCRIPTION</h2>
+
+        <form id="inscription-form">
+          <div class="form-group">
+            <label for="discord-name">Nom Discord</label>
+            <input
+              type="text"
+              id="discord-name"
+              name="discord-name"
+              placeholder="ex: TracymoTV#1234"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="duel-links-name">Nom Duel Links</label>
+            <input
+              type="text"
+              id="duel-links-name"
+              name="duel-links-name"
+              placeholder="ex: TracymoTV"
+              required
+            />
+          </div>
+
+          <div class="checkbox-group">
+            <input
+              type="checkbox"
+              id="accept-rules"
+              name="accept-rules"
+              required
+            />
+            <label for="accept-rules">
+              J'accepte le
+              <a href="reglements.html" target="_blank">règlement</a> du tournoi
+            </label>
+          </div>
+
+          <button type="submit" class="submit-button" id="submit-btn">
+            VALIDER L'INSCRIPTION
+          </button>
+        </form>
+
+        <div class="success-message" id="success-message">
+          <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h3>INSCRIPTION CONFIRMÉE !</h3>
+          <p>Votre inscription a bien été effectuée à dimanche !</p>
+          <p>Vous recevrez un message Discord de confirmation.</p>
+        </div>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="container">
+        <div class="main-content">
+          <div class="text-column">
+            <div class="title-container">
+              <h1 id="animated-title">LIGUE DU PHARAON</h1>
+            </div>
+
+            <p class="subtitle">Tournoi Élite 2026 - Tracymo TV</p>
+            <p>
+              Plongez dans l'arène ultime des duels ! La Ligue Du Pharaon 2026
+              présentée par Tracymo TV réunit les meilleurs duelistes pour des
+              affrontements légendaires. Que vous soyez un maître des stratégies
+              ou un passionné en herbe, ce tournoi est l'événement à ne pas
+              manquer.
+            </p>
+            <p>
+              Ce championnat Yu-Gi-Oh Duel Links est organisé entre amis. Chaque
+              semaine, les joueurs s'affrontent lors d'un tournoi à élimination
+              directe afin de gagner des points pour un classement mensuel et
+              annuel.
+            </p>
+            <p>
+              L'objectif est simple : <br />
+              👉 S'amuser <br />
+              👉 Jouer régulièrement <br />
+              👉 Partager <br />
+              Tous les duels comptent, chaque point peut faire la différence.<br />
+              Que le meilleur duelliste gagne ! ⚡
+            </p>
+
+            <h2 class="links-title">Liens pour suivre l'aventure</h2>
+
+            <div class="button-container">
+              <!-- A modifier -->
+              <a
+                href="https://discord.gg/"
+                class="social-button discord"
+                target="_blank"
+              >
+                <span class="nav-icon"><i class="fab fa-discord"></i></span>
+                <span class="nav-text">Discord</span>
+              </a>
+
+              <a
+                href="https://www.twitch.tv/tracymotv"
+                class="social-button twitch"
+                target="_blank"
+              >
+                <span class="nav-icon"><i class="fab fa-twitch"></i></span>
+                <span class="nav-text">Twitch</span>
+              </a>
+
+              <!-- A modifier -->
+              <a
+                href="https://www.tiktok.com/"
+                class="social-button tiktok"
+                target="_blank"
+              >
+                <span class="nav-icon"><i class="fab fa-tiktok"></i></span>
+                <span class="nav-text">Tik Tok</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="image-column">
+            <div class="deformed-rectangle">
+              <img src="assets/logo.png" alt="Logo Ligue Du Pharaon" />
+              <div class="image-overlay">
+                <h3>LIGUE DU PHARAON</h3>
+                <p>Tracymo TV • Édition 2026</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-bottom">
+          © 2026 <strong>TracymoTV</strong> - Tous droits réservés.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Variables pour le modal
+      const modal = document.getElementById("inscription-modal");
+      const openModalBtn = document.getElementById("open-modal");
+      const closeModalBtn = document.getElementById("close-modal");
+      const inscriptionForm = document.getElementById("inscription-form");
+      const successMessage = document.getElementById("success-message");
+      const submitBtn = document.getElementById("submit-btn");
+
+      // Ouvrir le modal
+      openModalBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden"; // Empêcher le scroll
+      });
+
+      // Fermer le modal
+      closeModalBtn.addEventListener("click", function () {
+        modal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      });
+
+      // Fermer le modal en cliquant en dehors
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) {
+          modal.classList.remove("active");
+          document.body.style.overflow = "auto";
+        }
+      });
+
+      // Gestion du formulaire
+      inscriptionForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        // Récupérer les données du formulaire
+        const discordName = document.getElementById("discord-name").value;
+        const duelLinksName = document.getElementById("duel-links-name").value;
+        const acceptRules = document.getElementById("accept-rules").checked;
+
+        if (!acceptRules) {
+          alert("Vous devez accepter le règlement pour vous inscrire.");
+          return;
+        }
+
+        // Désactiver le bouton pendant l'envoi
+        submitBtn.disabled = true;
+        submitBtn.textContent = "ENVOI EN COURS...";
+
+        // Obtenir la date et heure actuelles
+        const now = new Date();
+        const timeString = `${now.getHours().toString().padStart(2, "0")}:${now
+          .getMinutes()
+          .toString()
+          .padStart(2, "0")}`;
+        const dateString = `${now.getDate().toString().padStart(2, "0")}/${(
+          now.getMonth() + 1
+        )
+          .toString()
+          .padStart(2, "0")}/${now.getFullYear()}`;
+
+        try {
+          // ⚠️ REMPLACEZ CE WEBHOOK_URL PAR VOTRE WEBHOOK DISCORD
+          const WEBHOOK_URL =
+            "https://discord.com/api/webhooks/VOTRE_WEBHOOK_ICI";
+
+          // Créer l'embed Discord
+          const embed = {
+            title: "🎮 NOUVELLE INSCRIPTION - Ligue Du Pharaon",
+            color: 16711680, // Rouge
+            fields: [
+              {
+                name: "👤 Nom Discord",
+                value: discordName,
+                inline: true,
+              },
+              {
+                name: "🃏 Nom Duel Links",
+                value: duelLinksName,
+                inline: true,
+              },
+              {
+                name: "📅 Date d'inscription",
+                value: `${timeString} - ${dateString}`,
+              },
+              {
+                name: "✅ Statut",
+                value: "Inscription confirmée",
+              },
+            ],
+            timestamp: new Date().toISOString(),
+            footer: {
+              text: "Ligue Du Pharaon • Tracymo TV",
+            },
+          };
+
+          // Envoyer les données au webhook Discord
+          const response = await fetch(WEBHOOK_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              embeds: [embed],
+              content: `@here Nouvelle inscription de **${discordName}** !`,
+            }),
+          });
+
+          if (response.ok) {
+            // Afficher le message de succès
+            successMessage.classList.add("active");
+            inscriptionForm.style.display = "none";
+
+            // Réinitialiser le formulaire
+            setTimeout(() => {
+              inscriptionForm.reset();
+              inscriptionForm.style.display = "block";
+              successMessage.classList.remove("active");
+              modal.classList.remove("active");
+              document.body.style.overflow = "auto";
+
+              // Réactiver le bouton
+              submitBtn.disabled = false;
+              submitBtn.textContent = "VALIDER L'INSCRIPTION";
+            }, 5000);
+          } else {
+            throw new Error("Erreur lors de l'envoi vers Discord");
+          }
+        } catch (error) {
+          console.error("Erreur:", error);
+          alert(
+            "Une erreur est survenue lors de l'inscription. Veuillez réessayer."
+          );
+
+          // Réactiver le bouton en cas d'erreur
+          submitBtn.disabled = false;
+          submitBtn.textContent = "VALIDER L'INSCRIPTION";
+        }
+      });
+
+      // Navigation burger
+      const burger = document.getElementById("burger");
+      const navMenu = document.getElementById("nav-menu");
+
+      burger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+        burger.classList.toggle("active");
+      });
+
+      document
+        .querySelectorAll("#nav-menu a, .cta-button, .social-button")
+        .forEach((link) => {
+          link.addEventListener("click", () => {
+            navMenu.classList.remove("active");
+            burger.classList.remove("active");
+          });
+        });
+
+      // Effet de scroll sur le header
+      window.addEventListener("scroll", () => {
+        const header = document.querySelector("header");
+        if (window.scrollY > 50) {
+          header.style.background =
+            "linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(34, 34, 34, 0.98) 100%)";
+          header.style.boxShadow = "0 5px 25px rgba(255, 0, 0, 0.4)";
+        } else {
+          header.style.background =
+            "linear-gradient(135deg, var(--yu-gi-black) 0%, var(--yu-gi-dark) 100%)";
+          header.style.boxShadow = "0 4px 20px rgba(255, 0, 0, 0.3)";
+        }
+      });
+
+      // Animation des lettres du titre
+      function createLetterAnimation(elementId, startIndex = 0) {
+        const element = document.getElementById(elementId);
+        if (!element) return;
+
+        const text = element.textContent;
+        element.innerHTML = "";
+
+        for (let i = 0; i < text.length; i++) {
+          const span = document.createElement("span");
+          span.className = "letter";
+          span.textContent = text[i];
+          span.style.setProperty("--index", startIndex + i);
+          if (text[i] === " ") {
+            span.style.marginRight = "0.3em";
+          }
+          element.appendChild(span);
+        }
+      }
+
+      // Initialisation au chargement
+      document.addEventListener("DOMContentLoaded", () => {
+        createLetterAnimation("animated-title", 0);
+
+        // Animation du rectangle déformé
+        const deformedRect = document.querySelector(".deformed-rectangle");
+        if (deformedRect) {
+          deformedRect.style.opacity = "0";
+          deformedRect.style.transform =
+            "perspective(1000px) rotateY(-25deg) rotateX(15deg) scale(0.95)";
+          deformedRect.style.transition =
+            "all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.4s";
+
+          setTimeout(() => {
+            deformedRect.style.opacity = "1";
+            deformedRect.style.transform =
+              "perspective(1000px) rotateY(-15deg) rotateX(5deg) scale(1)";
+          }, 400);
+        }
+
+        // Animation du texte
+        const heroText = document.querySelector(".text-column");
+        if (heroText) {
+          heroText.style.opacity = "0";
+          heroText.style.transform = "translateX(-30px)";
+          heroText.style.transition = "all 1s ease 0.2s";
+
+          setTimeout(() => {
+            heroText.style.opacity = "1";
+            heroText.style.transform = "translateX(0)";
+          }, 200);
+        }
+
+        // Effets des boutons sociaux
+        const socialButtons = document.querySelectorAll(".social-button");
+        socialButtons.forEach((button) => {
+          button.addEventListener("mouseenter", function () {
+            this.style.animation = "none";
+          });
+
+          button.addEventListener("mouseleave", function () {
+            const type = this.classList.contains("discord")
+              ? "discord"
+              : this.classList.contains("twitch")
+              ? "twitch"
+              : "tiktok";
+            this.style.animation = `${type}Pulse 2s infinite`;
+          });
+        });
+      });
+
+      // Effet de survol sur le rectangle déformé
+      const deformedRect = document.querySelector(".deformed-rectangle");
+      if (deformedRect) {
+        deformedRect.addEventListener("mouseenter", function () {
+          this.style.transform =
+            "perspective(1000px) rotateY(-10deg) rotateX(3deg) scale(1.02)";
+        });
+
+        deformedRect.addEventListener("mouseleave", function () {
+          this.style.transform =
+            "perspective(1000px) rotateY(-15deg) rotateX(5deg) scale(1)";
+        });
+      }
+    </script>
+  </body>
+</html>
