@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classement - Ligue Du Pharaon</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        color: #fff;
+        background-color: #0a0a0a;
+        overflow-x: hidden;
+        background-image: radial-gradient(
+            circle at 20% 30%,
+            rgba(0, 100, 255, 0.1) 0%,
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(255, 0, 0, 0.1) 0%,
+            transparent 20%
+          );
+        position: relative;
+        min-height: 100vh;
+      }
+
+      :root {
+        --yu-gi-red: #ff0000;
+        --yu-gi-red-dark: #cc0000;
+        --yu-gi-red-light: #ff3333;
+        --yu-gi-blue: #0066ff;
+        --yu-gi-blue-dark: #0044cc;
+        --yu-gi-blue-light: #3399ff;
+        --yu-gi-neon-blue: #00ccff;
+        --yu-gi-black: #000000;
+        --yu-gi-dark: #111111;
+        --yu-gi-gray: #8c8c8c;
+        --yu-gi-yellow: #ffcc00;
+        --yu-gi-purple: #800080;
+        --discord-purple: #5865f2;
+        --twitch-purple: #9146ff;
+        --tiktok-pink: #ff0050;
+      }
+
+      .main-wrapper {
+        width: 50%;
+        min-width: 800px;
+        max-width: 1200px;
+        position: relative;
+        z-index: 10;
+        margin: 0 auto;
+      }
+
+      .pharaon-image {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 25vw;
+        object-fit: cover;
+        object-position: left center;
+        opacity: 0.9;
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+        z-index: 2;
+        pointer-events: none;
+        border-right: 3px solid var(--yu-gi-blue);
+      }
+
+      .marek-image {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        width: 25vw;
+        object-fit: cover;
+        object-position: right center;
+        opacity: 0.9;
+        filter: drop-shadow(0 0 20px rgba(0, 102, 255, 0.3));
+        z-index: 2;
+        pointer-events: none;
+        border-left: 3px solid var(--yu-gi-blue);
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--yu-gi-black) 0%,
+          var(--yu-gi-dark) 100%
+        );
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+        border-bottom: 3px solid var(--yu-gi-red);
+        box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 30px;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        background: rgba(255, 0, 0, 0.1);
+        border: 2px solid var(--yu-gi-red);
+        border-radius: 8px;
+      }
+
+      .logo-container img {
+        height: 60px;
+        width: auto;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+      }
+
+      .logo-text-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 15px;
+      }
+
+      .logo-text {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--yu-gi-red);
+        text-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+      }
+
+      .logo-subtitle {
+        font-family: "Roboto", sans-serif;
+        font-size: 0.8rem;
+        color: var(--yu-gi-blue-light);
+        font-weight: 300;
+        letter-spacing: 1px;
+        text-align: center;
+        width: 100%;
+        margin-top: 2px;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 5px;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        font-family: "Orbitron", sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 12px 20px;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 90px;
+      }
+
+      nav a {
+        border: 2px solid #ffffff;
+        animation: borderPulseWhite 2s infinite;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+
+      @keyframes borderPulseWhite {
+        0%,
+        100% {
+          border-color: #ffffff;
+          box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        50% {
+          border-color: #cccccc;
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+      }
+
+      .nav-icon {
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+        color: #ffffff;
+        display: block;
+      }
+
+      .nav-text {
+        font-size: 0.9rem;
+        display: block;
+      }
+
+      nav a.active,
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        animation: none;
+        border-color: #cccccc;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      }
+
+      nav a::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #ffffff, transparent, #ffffff);
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 27px;
+      }
+
+      nav a:hover::before {
+        opacity: 0.4;
+      }
+
+      .burger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        background: rgba(255, 0, 0, 0.1);
+        padding: 10px;
+        border-radius: 6px;
+        border: 2px solid var(--yu-gi-red);
+        margin-left: 15px;
+      }
+
+      .burger span {
+        width: 25px;
+        height: 3px;
+        background: var(--yu-gi-red);
+        margin: 3px 0;
+        transition: 0.3s;
+        border-radius: 2px;
+      }
+
+      .main-content {
+        min-height: calc(100vh - 180px);
+        padding: 140px 0 80px 0;
+        width: 100%;
+      }
+
+      .page-title {
+        text-align: center;
+        margin-bottom: 60px;
+        position: relative;
+      }
+
+      .page-title h1 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 3.5rem;
+        color: var(--yu-gi-red);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+      }
+
+      .title-line {
+        width: 200px;
+        height: 4px;
+        background: var(--yu-gi-red);
+        margin: 0 auto;
+        border-radius: 2px;
+        animation: linePulse 2s infinite;
+      }
+
+      @keyframes linePulse {
+        0%,
+        100% {
+          width: 200px;
+          opacity: 1;
+        }
+        50% {
+          width: 250px;
+          opacity: 0.7;
+        }
+      }
+
+      .classement-section {
+        background: linear-gradient(
+          145deg,
+          rgba(0, 0, 0, 0.8),
+          rgba(34, 34, 34, 0.9)
+        );
+        border: 2px solid var(--yu-gi-red);
+        border-radius: 15px;
+        padding: 40px;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 30px rgba(255, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .classement-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(255, 0, 0, 0.3);
+      }
+
+      .section-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 2rem;
+        color: var(--yu-gi-blue-light);
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .section-title i {
+        color: var(--yu-gi-red);
+        font-size: 2.2rem;
+      }
+
+      .sheets-container {
+        width: 100%;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-top: 20px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        border: 2px solid var(--yu-gi-blue);
+      }
+
+      .sheets-iframe {
+        width: 100%;
+        height: 600px;
+        border: none;
+        background: white;
+      }
+
+      .stats-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin: 30px 0;
+      }
+
+      .stat-card {
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 2px solid var(--yu-gi-blue);
+        border-radius: 12px;
+        padding: 25px;
+        text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--yu-gi-red);
+        box-shadow: 0 10px 25px rgba(255, 0, 0, 0.2);
+      }
+
+      .stat-icon {
+        font-size: 3rem;
+        color: var(--yu-gi-red);
+        margin-bottom: 15px;
+      }
+
+      .stat-number {
+        font-family: "Orbitron", sans-serif;
+        font-size: 2.5rem;
+        color: var(--yu-gi-blue-light);
+        font-weight: 700;
+        margin: 10px 0;
+        text-shadow: 0 0 10px rgba(0, 102, 255, 0.5);
+      }
+
+      .stat-label {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .info-box {
+        background: linear-gradient(
+          145deg,
+          rgba(0, 102, 255, 0.1),
+          rgba(0, 102, 255, 0.05)
+        );
+        border: 2px solid var(--yu-gi-blue);
+        border-radius: 10px;
+        padding: 25px;
+        margin: 30px 0;
+        text-align: center;
+      }
+
+      .info-box h3 {
+        color: var(--yu-gi-blue);
+        font-family: "Orbitron", sans-serif;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+      }
+
+      .info-box a {
+        color: var(--yu-gi-blue-light);
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+        margin-top: 15px;
+        transition: all 0.3s ease;
+        border: 1px solid var(--yu-gi-blue);
+      }
+
+      .info-box a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
+      }
+
+      footer {
+        background: linear-gradient(
+          135deg,
+          var(--yu-gi-black) 0%,
+          var(--yu-gi-dark) 100%
+        );
+        padding: 30px 0;
+        border-top: 3px solid var(--yu-gi-blue);
+        text-align: center;
+        position: relative;
+        width: 100%;
+        margin-top: auto;
+      }
+
+      footer::before {
+        content: "";
+        position: absolute;
+        top: -3px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--yu-gi-blue);
+      }
+
+      .footer-bottom {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1rem;
+        color: var(--yu-gi-red);
+        font-weight: 500;
+        letter-spacing: 1px;
+      }
+
+      .footer-bottom strong {
+        color: var(--yu-gi-blue-light);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1400px) {
+        .main-wrapper {
+          width: 60%;
+          min-width: 700px;
+        }
+
+        .pharaon-image,
+        .marek-image {
+          width: 20vw;
+        }
+      }
+
+      @media (max-width: 1200px) {
+        .container {
+          padding: 0 20px;
+        }
+
+        .page-title h1 {
+          font-size: 3rem;
+        }
+
+        .sheets-iframe {
+          height: 550px;
+        }
+
+        .main-wrapper {
+          width: 70%;
+          min-width: 600px;
+        }
+
+        .pharaon-image,
+        .marek-image {
+          width: 15vw;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .page-title h1 {
+          font-size: 2.5rem;
+        }
+
+        .classement-section {
+          padding: 30px;
+        }
+
+        .section-title {
+          font-size: 1.8rem;
+        }
+
+        .stats-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .sheets-iframe {
+          height: 500px;
+        }
+
+        .main-wrapper {
+          width: 80%;
+          min-width: 500px;
+          border-left: 3px solid var(--yu-gi-blue);
+          border-right: 3px solid var(--yu-gi-blue);
+        }
+
+        .pharaon-image,
+        .marek-image {
+          display: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        nav ul {
+          display: none;
+          position: fixed;
+          top: 100px;
+          left: 0;
+          width: 100%;
+          background: linear-gradient(
+            135deg,
+            var(--yu-gi-black) 0%,
+            var(--yu-gi-dark) 100%
+          );
+          flex-direction: column;
+          padding: 20px;
+          text-align: center;
+          gap: 10px;
+          border-top: 2px solid var(--yu-gi-red);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+          z-index: 999;
+        }
+
+        nav ul.active {
+          display: flex;
+        }
+
+        nav a {
+          padding: 15px;
+          min-width: auto;
+          width: 100%;
+          max-width: 300px;
+          margin: 0 auto;
+        }
+
+        .burger {
+          display: flex;
+        }
+
+        .logo-text {
+          font-size: 1.5rem;
+        }
+
+        .page-title h1 {
+          font-size: 2.2rem;
+        }
+
+        .main-content {
+          padding: 120px 0 60px 0;
+        }
+
+        .classement-section {
+          padding: 25px 20px;
+        }
+
+        .section-title {
+          font-size: 1.6rem;
+        }
+
+        .sheets-iframe {
+          height: 450px;
+        }
+
+        .stats-container {
+          grid-template-columns: 1fr;
+        }
+
+        .main-wrapper {
+          width: 95%;
+          min-width: auto;
+          padding: 0 15px;
+          border-left: 2px solid var(--yu-gi-blue);
+          border-right: 2px solid var(--yu-gi-blue);
+        }
+      }
+
+      @media (max-width: 576px) {
+        .page-title h1 {
+          font-size: 1.8rem;
+        }
+
+        .container {
+          padding: 0 15px;
+        }
+
+        .logo-text {
+          font-size: 1.2rem;
+        }
+
+        .main-content {
+          padding: 110px 0 50px 0;
+        }
+
+        .title-line {
+          width: 150px;
+        }
+
+        @keyframes linePulse {
+          0%,
+          100% {
+            width: 150px;
+            opacity: 1;
+          }
+          50% {
+            width: 180px;
+            opacity: 0.7;
+          }
+        }
+
+        .section-title {
+          font-size: 1.4rem;
+        }
+
+        .sheets-iframe {
+          height: 400px;
+        }
+
+        .stat-number {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <img src="assets/pharaon.jpg" alt="Pharaon" class="pharaon-image" />
+    <img src="assets/marek.jpg" alt="Marek" class="marek-image" />
+
+    <header>
+      <div class="container">
+        <div class="nav-container">
+          <div class="logo-container">
+            <img src="assets/logo.png" alt="Logo Ligue Du Pharaon" />
+            <div class="logo-text-container">
+              <div class="logo-text">YU-GI-OH Duel Links!</div>
+              <div class="logo-subtitle">TRACYMO TV PRESENTE</div>
+            </div>
+          </div>
+
+          <nav>
+            <ul id="nav-menu">
+              <li>
+                <a href="index.html">
+                  <span class="nav-icon">🏠</span>
+                  <span class="nav-text">Accueil</span>
+                </a>
+              </li>
+              <li>
+                <a href="reglements.html">
+                  <span class="nav-icon">📜</span>
+                  <span class="nav-text">Règlement</span>
+                </a>
+              </li>
+              <li>
+                <a href="classement.html" class="active">
+                  <span class="nav-icon">🏆</span>
+                  <span class="nav-text">Classement</span>
+                </a>
+              </li>
+            </ul>
+
+            <div class="burger" id="burger">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-wrapper">
+      <main class="main-content">
+        <div class="container">
+          <div class="page-title">
+            <h1>Classement</h1>
+            <div class="title-line"></div>
+          </div>
+
+          <section class="classement-section">
+            <h2 class="section-title">
+              <i class="fas fa-trophy"></i> Résultats Tournoi
+            </h2>
+
+            <div class="info-box">
+              <h3><i class="fas fa-info-circle"></i> Prochain Tournoi</h3>
+              <p>
+                Le prochain tournoi aura lieu le
+                <strong>Dimanche à 18h30</strong>.
+              </p>
+              <p>
+                Les résultats seront mis à jour dans les 24h suivant la fin du
+                tournoi.
+              </p>
+            </div>
+
+            <div class="sheets-container">
+              <iframe
+                class="sheets-iframe"
+                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQN5kE6bYLM2nfDWqchO8HF5uXDMabxtY7nIclPKsYM8Vaw14RuLQVhX0ZX2231-kY-Tr0OTCcbY1Gw/pubhtml?gid=1154588281&single=true"
+                loading="lazy"
+              >
+              </iframe>
+            </div>
+          </section>
+
+          <section class="classement-section">
+            <h2 class="section-title">
+              <i class="fas fa-calendar-alt"></i> Classement du Mois
+            </h2>
+
+            <div class="info-box">
+              <h3><i class="fas fa-chart-line"></i> Comment ça marche ?</h3>
+              <p>
+                Le classement mensuel prend en compte tous les tournois du mois
+                en cours.
+              </p>
+              <p>
+                Chaque participation rapporte des points, et les victoires
+                rapportent des bonus.
+              </p>
+              <p>Le top 3 du mois remporte des récompenses spéciales !</p>
+            </div>
+
+            <div class="sheets-container">
+              <iframe
+                class="sheets-iframe"
+                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQN5kE6bYLM2nfDWqchO8HF5uXDMabxtY7nIclPKsYM8Vaw14RuLQVhX0ZX2231-kY-Tr0OTCcbY1Gw/pubhtml?gid=627332792&single=true"
+                loading="lazy"
+              >
+              </iframe>
+            </div>
+          </section>
+
+          <section class="classement-section">
+            <h2 class="section-title">
+              <i class="fas fa-chart-bar"></i> Classement Général
+            </h2>
+
+            <div class="info-box">
+              <h3><i class="fas fa-table"></i> Tableau des scores</h3>
+              <p>
+                Le classement général est mis à jour en temps réel via Google
+                Sheets.
+              </p>
+              <p>
+                Vous pouvez consulter le tableau complet en cliquant sur le lien
+                ci-dessous :
+              </p>
+              <a
+                href="https://docs.google.com/spreadsheets/d/16jX9C3an50mrux1DGEBk0OJwm518Q4R_VexgKBWOnvk/edit?usp=sharing"
+                target="_blank"
+              >
+                <i class="fas fa-external-link-alt"></i> Ouvrir le tableau
+                complet
+              </a>
+            </div>
+
+            <div class="sheets-container">
+              <iframe
+                class="sheets-iframe"
+                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQN5kE6bYLM2nfDWqchO8HF5uXDMabxtY7nIclPKsYM8Vaw14RuLQVhX0ZX2231-kY-Tr0OTCcbY1Gw/pubhtml?gid=0&single=true"
+                loading="lazy"
+              >
+              </iframe>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer>
+        <div class="container">
+          <div class="footer-bottom">
+            © 2026 <strong>TracymoTV</strong> - Tous droits réservés.
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const burger = document.getElementById("burger");
+      const navMenu = document.getElementById("nav-menu");
+
+      burger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+        burger.classList.toggle("active");
+      });
+
+      document.querySelectorAll("#nav-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+          burger.classList.remove("active");
+        });
+      });
+
+      window.addEventListener("scroll", () => {
+        const header = document.querySelector("header");
+        if (window.scrollY > 50) {
+          header.style.background =
+            "linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(34, 34, 34, 0.98) 100%)";
+          header.style.boxShadow = "0 5px 25px rgba(255, 0, 0, 0.4)";
+        } else {
+          header.style.background =
+            "linear-gradient(135deg, var(--yu-gi-black) 0%, var(--yu-gi-dark) 100%)";
+          header.style.boxShadow = "0 4px 20px rgba(255, 0, 0, 0.3)";
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const sections = document.querySelectorAll(".classement-section");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+          }
+        );
+
+        sections.forEach((section) => {
+          section.style.opacity = "0";
+          section.style.transform = "translateY(30px)";
+          section.style.transition = "all 0.6s ease";
+          observer.observe(section);
+        });
+
+        const title = document.querySelector(".page-title h1");
+        title.style.opacity = "0";
+        title.style.transform = "translateY(-20px)";
+        title.style.transition = "all 0.8s ease 0.2s";
+
+        setTimeout(() => {
+          title.style.opacity = "1";
+          title.style.transform = "translateY(0)";
+        }, 200);
+      });
+    </script>
+  </body>
+</html>
