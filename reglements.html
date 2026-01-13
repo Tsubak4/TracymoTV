@@ -475,6 +475,11 @@
         color: var(--yu-gi-blue-light);
       }
 
+      .footer-bottom a:hover {
+        color: white !important;
+        text-decoration: underline !important;
+      }
+
       @media (max-width: 1200px) {
         .container {
           padding: 0 20px;
@@ -826,7 +831,17 @@
     <footer>
       <div class="container">
         <div class="footer-bottom">
-          © 2026 <strong>TracymoTV</strong> - Tous droits réservés.
+          © 2026 <strong>TracymoTV</strong> -
+          <a
+            href="droits.html"
+            style="
+              color: inherit;
+              text-decoration: none;
+              transition: color 0.3s ease, text-decoration 0.3s ease;
+            "
+          >
+            Tous droits réservés
+          </a>
         </div>
       </div>
     </footer>
