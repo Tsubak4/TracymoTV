@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Droits d'Auteur</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        color: #fff;
+        background-color: #000;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid #0f0;
+        border-radius: 10px;
+        margin: 10px;
+        box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+        animation: borderPulse 3s infinite alternate;
+      }
+
+      @keyframes borderPulse {
+        0% {
+          border-color: #0a0;
+          box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+        100% {
+          border-color: #0f0;
+          box-shadow: 0 0 40px rgba(0, 255, 0, 0.6),
+            0 0 60px rgba(0, 255, 0, 0.3);
+        }
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
+        background: conic-gradient(
+          from 0deg,
+          transparent 0deg,
+          rgba(0, 255, 0, 0.1) 30deg,
+          transparent 60deg
+        );
+        z-index: 1;
+        pointer-events: none;
+        animation: radarScan 4s linear infinite;
+        border-radius: 8px;
+        opacity: 0.7;
+      }
+
+      @keyframes radarScan {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #matrix-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+
+      .content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        width: 100%;
+      }
+
+      .back-arrow {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        background: rgba(0, 0, 0, 0.8);
+        border: 2px solid #0f0;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 20px #0f0;
+        animation: matrixGlow 2s infinite alternate;
+        z-index: 3;
+      }
+
+      @keyframes matrixGlow {
+        0% {
+          box-shadow: 0 0 10px #0f0, 0 0 20px rgba(0, 255, 0, 0.5);
+          border-color: #0f0;
+        }
+        100% {
+          box-shadow: 0 0 25px #0f0, 0 0 40px rgba(0, 255, 0, 0.8),
+            0 0 60px rgba(0, 255, 0, 0.3);
+          border-color: #0f0;
+        }
+      }
+
+      .back-arrow:hover {
+        transform: translateX(-5px);
+        background: rgba(0, 255, 0, 0.1);
+        box-shadow: 0 0 30px #0f0, 0 0 50px rgba(0, 255, 0, 0.5);
+      }
+
+      .back-arrow i {
+        font-size: 1.8rem;
+        color: #0f0;
+        text-shadow: 0 0 10px #0f0;
+      }
+
+      .main-content {
+        text-align: center;
+        padding: 40px;
+        background: rgba(0, 0, 0, 0.85);
+        border: 2px solid #0f0;
+        border-radius: 15px;
+        box-shadow: 0 0 40px rgba(0, 255, 0, 0.3),
+          inset 0 0 20px rgba(0, 255, 0, 0.1);
+        backdrop-filter: blur(5px);
+        position: relative;
+        overflow: hidden;
+        z-index: 2;
+      }
+
+      .main-content::before {
+        content: "";
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(0, 255, 0, 0.1),
+          transparent
+        );
+        animation: scanLine 3s linear infinite;
+        z-index: 1;
+      }
+
+      @keyframes scanLine {
+        0% {
+          top: -100%;
+        }
+        100% {
+          top: 200%;
+        }
+      }
+
+      .title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 2.5rem;
+        color: #0f0;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+        padding-bottom: 20px;
+        text-shadow: 0 0 15px #0f0, 0 0 30px rgba(0, 255, 0, 0.5);
+        animation: titleFlicker 4s infinite alternate;
+      }
+
+      @keyframes titleFlicker {
+        0%,
+        19%,
+        21%,
+        23%,
+        25%,
+        54%,
+        56%,
+        100% {
+          text-shadow: 0 0 15px #0f0, 0 0 30px rgba(0, 255, 0, 0.5);
+          opacity: 1;
+        }
+        20%,
+        24%,
+        55% {
+          text-shadow: 0 0 5px #0f0, 0 0 10px rgba(0, 255, 0, 0.2);
+          opacity: 0.8;
+        }
+      }
+
+      .title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #0f0, transparent);
+        border-radius: 2px;
+        box-shadow: 0 0 10px #0f0;
+        animation: linePulse 2s infinite alternate;
+      }
+
+      @keyframes linePulse {
+        0% {
+          width: 45%;
+          opacity: 0.7;
+          box-shadow: 0 0 10px #0f0;
+        }
+        100% {
+          width: 55%;
+          opacity: 1;
+          box-shadow: 0 0 20px #0f0, 0 0 30px rgba(0, 255, 0, 0.5);
+        }
+      }
+
+      .profile-image {
+        margin: 30px 0;
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+
+      .profile-image::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background: linear-gradient(45deg, #0f0, #0a0, #0f0);
+        border-radius: 50%;
+        z-index: -1;
+        filter: blur(15px);
+        opacity: 0.3;
+        animation: imageGlow 3s infinite alternate;
+      }
+
+      @keyframes imageGlow {
+        0% {
+          opacity: 0.2;
+          filter: blur(10px);
+        }
+        100% {
+          opacity: 0.4;
+          filter: blur(20px);
+        }
+      }
+
+      .profile-image img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 4px solid #0f0;
+        object-fit: cover;
+        box-shadow: 0 0 30px #0f0, inset 0 0 20px rgba(0, 255, 0, 0.2);
+        transition: all 0.3s ease;
+        filter: contrast(1.2) brightness(1.1);
+      }
+
+      .profile-image img:hover {
+        transform: scale(1.05) rotate(5deg);
+        box-shadow: 0 0 50px #0f0, 0 0 80px rgba(0, 255, 0, 0.4),
+          inset 0 0 30px rgba(0, 255, 0, 0.3);
+      }
+
+      .info-container {
+        margin-top: 30px;
+      }
+
+      .info-item {
+        margin: 25px 0;
+        padding: 20px;
+        background: rgba(0, 20, 0, 0.3);
+        border-radius: 10px;
+        border: 1px solid rgba(0, 255, 0, 0.3);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .info-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 255, 0, 0.2),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .info-item:hover::before {
+        left: 100%;
+      }
+
+      .info-item:hover {
+        background: rgba(0, 30, 0, 0.4);
+        border-color: #0f0;
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 255, 0, 0.2);
+      }
+
+      .info-label {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.2rem;
+        color: #0f0;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px #0f0;
+      }
+
+      .info-label span.underlined {
+        text-decoration: underline;
+        text-decoration-color: #0f0;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+        text-shadow: 0 0 15px #0f0;
+      }
+
+      .info-value {
+        font-size: 1.1rem;
+        color: #0f0;
+        line-height: 1.6;
+        font-weight: 300;
+        text-shadow: 0 0 5px #0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .info-value a {
+        color: #0f0;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        text-shadow: 0 0 10px #0f0;
+        font-weight: 500;
+      }
+
+      .info-value a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #0f0;
+        transition: width 0.3s ease;
+        box-shadow: 0 0 5px #0f0;
+      }
+
+      .info-value a:hover {
+        color: #0f0;
+        text-shadow: 0 0 20px #0f0;
+      }
+
+      .info-value a:hover::after {
+        width: 100%;
+      }
+
+      .discord-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: #0f0;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .discord-link::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #0f0;
+        transition: width 0.3s ease;
+        box-shadow: 0 0 5px #0f0;
+      }
+
+      .discord-link:hover {
+        color: #0f0;
+        text-shadow: 0 0 20px #0f0;
+      }
+
+      .discord-link:hover::after {
+        width: 100%;
+      }
+
+      .discord-icon {
+        font-size: 1.3rem;
+        transition: all 0.3s ease;
+      }
+
+      .discord-link:hover .discord-icon {
+        transform: scale(1.2);
+        text-shadow: 0 0 15px #0f0;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          margin: 5px;
+          padding: 15px;
+        }
+
+        body::before {
+          top: 1px;
+          left: 1px;
+          right: 1px;
+          bottom: 1px;
+          border-radius: 6px;
+        }
+
+        .back-arrow {
+          top: 20px;
+          left: 20px;
+          width: 50px;
+          height: 50px;
+        }
+
+        .back-arrow i {
+          font-size: 1.5rem;
+        }
+
+        .main-content {
+          padding: 30px 20px;
+          margin-top: 40px;
+        }
+
+        .title {
+          font-size: 2rem;
+          margin-bottom: 30px;
+        }
+
+        .title::after {
+          width: 50%;
+        }
+
+        .profile-image img {
+          width: 120px;
+          height: 120px;
+        }
+
+        .info-item {
+          padding: 15px;
+          margin: 20px 0;
+        }
+
+        .info-label {
+          font-size: 1.1rem;
+        }
+
+        .info-value {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 10px;
+          margin: 3px;
+        }
+
+        body::before {
+          top: 1px;
+          left: 1px;
+          right: 1px;
+          bottom: 1px;
+          border-radius: 5px;
+        }
+
+        .back-arrow {
+          top: 15px;
+          left: 15px;
+          width: 45px;
+          height: 45px;
+        }
+
+        .main-content {
+          padding: 25px 15px;
+        }
+
+        .title {
+          font-size: 1.8rem;
+          margin-bottom: 25px;
+          padding-bottom: 15px;
+        }
+
+        .title::after {
+          width: 50%;
+          height: 2px;
+        }
+
+        .profile-image img {
+          width: 100px;
+          height: 100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="matrix-canvas"></canvas>
+
+    <a href="index.html" class="back-arrow" title="Retour à l'accueil">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <div class="content">
+      <div class="main-content">
+        <h1 class="title">© Tous Droits Réservés</h1>
+
+        <div class="profile-image">
+          <img src="assets/Tsubaka.png" alt="Tsubaka" />
+        </div>
+
+        <div class="info-container">
+          <div class="info-item">
+            <div class="info-label">
+              <span class="underlined">Développeur :</span>
+            </div>
+            <div class="info-value">
+              <a
+                href="https://discord.gg/WQGncqU8Ud"
+                class="discord-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Rejoindre le Discord de Tsubaka784"
+              >
+                <i class="fab fa-discord discord-icon"></i>Tsubaka784
+              </a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-label">
+              <span class="underlined">Hébergeur :</span>
+            </div>
+            <div class="info-value">
+              <a
+                href="https://github.com/Tsubak4"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://github.com/Tsubak4
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("matrix-canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const matrixChars =
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
+      const chars = matrixChars.split("");
+
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+
+      const drops = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = 1;
+      }
+
+      const colors = ["#0f0", "#0a0", "#0c0", "#0e0"];
+
+      function drawMatrix() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.font = `${fontSize}px monospace`;
+
+        for (let i = 0; i < drops.length; i++) {
+          const text = chars[Math.floor(Math.random() * chars.length)];
+
+          const colorIndex = Math.floor(Math.random() * colors.length);
+          const isBright = Math.random() > 0.8;
+          const color = isBright ? "#0f0" : colors[colorIndex];
+
+          ctx.fillStyle = color;
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+
+          drops[i]++;
+        }
+      }
+
+      let matrixInterval = setInterval(drawMatrix, 35);
+
+      window.addEventListener("resize", function () {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        drops.length = 0;
+        const newColumns = canvas.width / fontSize;
+        for (let i = 0; i < newColumns; i++) {
+          drops[i] = (Math.random() * canvas.height) / fontSize;
+        }
+      });
+
+      document
+        .querySelector(".back-arrow")
+        .addEventListener("mouseenter", function () {
+          this.style.animationPlayState = "paused";
+        });
+
+      document
+        .querySelector(".back-arrow")
+        .addEventListener("mouseleave", function () {
+          this.style.animationPlayState = "running";
+        });
+
+      setInterval(() => {
+        const title = document.querySelector(".title");
+        if (Math.random() > 0.7) {
+          title.style.opacity = "0.7";
+          setTimeout(() => {
+            title.style.opacity = "1";
+          }, 50);
+        }
+      }, 3000);
+    </script>
+  </body>
+</html>
